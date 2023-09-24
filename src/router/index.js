@@ -21,7 +21,7 @@ const router = createRouter({
       path: '/crud',
       name: 'crud',
       // route for the CRUD operation
-      component: () => import('../views/Crudview.vue')
+      component: () => import('../views/CrudView.vue')
     }
   ]
 })
