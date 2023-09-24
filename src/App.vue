@@ -1,10 +1,7 @@
 
 <template>
-<head>
-</head>
+<header></header>
 <body>
     <RouterView />
 </body>
 </template>
-
-
