@@ -11,19 +11,7 @@ export default{
     },
     methods:{
         getData(){
-            if (localStorage.getItem('Students') === null){
-
-                this.newStudent.push({firstname: this.firstname, lastname: this.lastname, email: this.email, course: this.course});
-                localStorage.setItem('Students', JSON.stringify(this.newStudent));
-
-            }else{
-
-                var localStudents = JSON.parse(localStorage.getItem('Students'));
-                localStudents.push({firstname: this.firstname, lastname: this.lastname, email: this.email, course: this.course});
-                console.log(localStudents);
-                localStorage.setItem('Students', JSON.stringify(localStudents));
-            }
-            this.$router.push('/');
+          console.log(this.$router.params.studentID);
         }
     },
 }
@@ -87,7 +75,7 @@ export default{
       class="inline-block w-full rounded bg-green-600 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-green-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
       data-te-ripple-init
       data-te-ripple-color="light">
-      Add Student
+      Save Student
     </button>
   </form>
 </div>
