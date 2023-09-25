@@ -1,22 +1,52 @@
 <script>
 export default{
     data(){
-        return {
-            newStudent: [],
+      if(this.$route.params.id === undefined){
+        return{
+          newStudent: [],
             firstname: null,
             lastname: null,
             email: null,
             course: null,
         }
+      }else{
+        return {
+            newStudent: [],
+            firstname: JSON.parse(localStorage.getItem("Students"))[this.$route.params.id].firstname,
+            lastname: JSON.parse(localStorage.getItem("Students"))[this.$route.params.id].lastname,
+            email: JSON.parse(localStorage.getItem("Students"))[this.$route.params.id].email,
+            course: JSON.parse(localStorage.getItem("Students"))[this.$route.params.id].course,
+        }
+      }
     },
     methods:{
         getData(){
-          console.log(this.$router.params.studentID);
+            if(this.$route.params.id === undefined){
+                if(localStorage.getItem('Students') === null){
+
+                    this.newStudent.push({firstname: this.firstname, lastname: this.lastname, email: this.email, course: this.course});
+                    localStorage.setItem('Students', JSON.stringify(this.newStudent));
+
+                }else{
+
+                    var localStudents = JSON.parse(localStorage.getItem('Students'));
+                    localStudents.push({firstname: this.firstname, lastname: this.lastname, email: this.email, course: this.course});
+                    console.log(localStudents);
+                    localStorage.setItem('Students', JSON.stringify(localStudents));
+                }
+
+                this.$router.push('/');
+            }
+            else{
+                var currentStudents = JSON.parse(localStorage.getItem("Students"));
+                currentStudents[this.$route.params.id] = {firstname: this.firstname, lastname: this.lastname, email: this.email, course: this.course};
+                localStorage.setItem("Students", JSON.stringify(currentStudents));
+                this.$router.push('/');
+            }
         }
-    },
+    }
 }
 </script>
-
 <template>
 <div class="add">
 <div class="flex items-center justify-center h-screen">
@@ -28,7 +58,7 @@ export default{
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
         First Name
       </label>
-      <input v-model="firstname" name="firstname" class="appearance-none block w-full bg-slate-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Enter Firstname">
+      <input v-model="firstname" name="firstname"  class="appearance-none block w-full bg-slate-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Enter Firstname">
     </div>
     <div class="w-full md:w-1/2 px-3">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">

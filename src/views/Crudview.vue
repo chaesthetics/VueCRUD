@@ -17,7 +17,7 @@
         this.$router.go(this.$router.currentRoute)
       },
       editStudent:function(index){
-        this.$router.push({path: '/new', name: 'add', params:{ studentID: '123' }} );
+        this.$router.push(`/edit/${index}`);
       },
     }
   }
